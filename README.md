@@ -31,8 +31,8 @@ Nice to have:
 ... more steps might appear later on if necessary.
 
 ### Credentials and other information regarding VM
-V1 - use VirtualBox in bridged network adapter mode. Preinstalled VS Code and preconfigured DB, Apache2 accessible at http://cloud-dev/ or localhost of on VM.
-For some reason shared clipboard and drag&drop fails. If you cound find out why, It'd be great. Maybe VBox Guest Additions reinstall?
+V1 - use VirtualBox in bridged network adapter mode. Preinstalled VS Code and preconfigured DB, Apache2 accessible at http://cloud-dev/ or localhost if on VM.
+For some reason shared clipboard and drag&drop fails. If you could find out why, it'd be great. Maybe VBox Guest Additions reinstall?
 
 Passwords:
 
