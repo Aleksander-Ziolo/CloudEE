@@ -1,0 +1,34 @@
+html,body{
+	width: 100%;
+	height: 100%;
+}
+body{
+	background-color: #e8e8ea !important;
+}
+.center-img{
+	margin: 0 auto;
+}
+.style-btn{
+	margin-top: 15px;
+	margin-bottom: 15px !important;
+}
+.text-style{
+	margin-bottom: 20px;
+}
+.pdf-view{
+	width: 98%;
+	height: 100%;
+	margin: 0 auto;
+	display: block;
+}
+.music{
+	width: 100%;
+	
+}
+@media (min-width: 992px){
+.music{
+	width: 600px;
+	margin:0 auto;
+	display: block;
+}
+}

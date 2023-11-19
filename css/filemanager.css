@@ -1,0 +1,480 @@
+.chevron {
+  display: inline-block;
+  position: relative;
+  clear: both;
+  padding: 8px 20px;
+  /*height:40px;
+  width: 200px;*/
+  height:auto;
+  width: auto;
+  margin-left:3px;
+  margin-top: 4px;
+  text-align:center;
+}
+
+.chevron:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: rgb(161, 190, 234);
+  color: white;
+  -webkit-transform: skew(40deg, 0deg);
+  -moz-transform: skew(40deg, 0deg);
+  -ms-transform: skew(40deg, 0deg);
+  -o-transform: skew(40deg, 0deg);
+  transform: skew(40deg, 0deg);
+  z-index:-1;
+}
+
+.chevron:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 50%;
+  width: 100%;
+  background: rgb(161, 190, 234);
+  -webkit-transform: skew(-40deg, 0deg);
+  -moz-transform: skew(-40deg, 0deg);
+  -ms-transform: skew(-40deg, 0deg);
+  -o-transform: skew(-40deg, 0deg);
+  transform: skew(-40deg, 0deg);
+   z-index:-1;
+}
+/*.chevron a:hover{
+	text-decoration: none;
+}
+.chevron a:active{
+	text-decoration: none;
+}*/
+.navbar{
+	border-radius: 0px !important;
+	color: white !important;
+}
+.navbar-inverse{
+	background-color: #002029 !important;
+	color: white !important;
+}
+.navbar-collapse{
+	color: white !important;
+}
+.img{
+	width: 149px;
+	height: 50px;
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+	padding-left: 25px !important;
+}
+.login{
+	color: white;
+	padding: 15px;
+	line-height: 20px;
+	position: relative;
+	display: block;
+}
+.line-dir{
+	width:860px;
+	height:34px;
+	border:1px solid #d2d6e0; 
+	background-color: #e5e6e8;
+	clear: left;
+}
+.line-file{
+	width:860px;
+	height:35px;
+	border:1px solid #dcdee2; 
+	background-color: #eff0f2;
+	clear: left;
+}
+.ext-dir{
+	float:left;
+	width:60px;
+	height:33px;
+	text-align: center;
+	border-right:1px solid #d2d6e0;
+	padding-top: 5px;
+}
+.ext-file{
+	float:left;
+	width:60px;
+	height:34px;
+	text-align: center;
+	border-right:1px solid #dcdee2; 
+	padding-top: 5px;
+}
+.file-file{
+	width:400px;
+	height:34px;
+	border-right:1px solid #dcdee2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	float:left;
+}
+.file-dir{
+	width:400px;
+	height:33px;
+	border-right:1px solid #d2d6e0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	float:left;
+}
+.update-dir{
+	float:left;
+	width:170px;
+	height:33px;
+	text-align: center;
+	border-right:1px solid #d2d6e0;
+	padding-top: 5px;
+}
+.update-file{
+	float:left;
+	width:170px;
+	height:34px;
+	text-align: center;
+	border-right:1px solid #dcdee2;
+	padding-top: 5px;
+}
+.size-dir{
+	float:left;
+	width:80px;
+	height:33px;
+	text-align: center;
+	border-right:1px solid #d2d6e0;
+	padding-top: 5px;
+}
+.size-file{
+	float:left;
+	width:80px;
+	height:34px;
+	text-align: center;
+	border-right:1px solid #dcdee2;
+	padding-top: 5px;
+}
+.delete-dir{
+	float:left;
+	width:148px;
+	height:34px;
+}
+.delete-dir-file{
+	float:left;
+	width:60px;
+	height:34px;
+	border-right:1px solid #dcdee2;
+}
+.download-file{
+	float: left;
+	width: 88px;
+	height: 25px;
+}
+.btn-delete-dir{
+	height: 100%;
+	width: 100%;
+}
+.delete{
+	padding: 5px 5px !important;
+}
+.download{
+	padding: 5px 10px !important;
+}
+.back-div{
+	width:100%;
+	height:45px;
+	clear: left;
+}
+.back-btn{
+	margin-left: 30px;
+	margin-top: 5px;
+}
+
+.path a{
+	color: #002029;
+}
+.path a:hover{
+	color: #002029;
+}
+/*.path{
+	font-weight: bold;
+}*/
+.table-dark{
+	/*background-color: #e8e9ea;*/
+	background-color: #8c959e;
+	color:white;
+}
+.tr-file{
+	background-color: #eff0f2;
+	color: black;
+}
+.tr-dir{
+	background-color: #e3e9ef;
+	color: black;
+}
+.inner1{
+	text-align:center;
+	padding: 5px 15px;
+}
+.inner2{
+	padding: 5px 30px;
+	text-align:center;
+}
+.inner2 a{
+	text-decoration:none;
+	color: white;
+}
+.fileemanager{
+	display: block;
+	/*background-color: #afbfd8;*/
+	clear: left !important;
+	margin: 0 auto;
+	margin-bottom:40px;
+	border-radius: 5px;
+	background: linear-gradient(to bottom, #afbfd8, #d2deef, #afbfd8);
+}
+.center-inner{
+	margin-top:10px;
+	display:block;
+	text-align:center;
+}
+.center-inner a{
+	margin-left:10px;
+	margin-top:5px;
+}
+.folderman{
+	display: block;
+	/*background-color: #afbfd8;*/
+	clear: left !important;
+	/*margin-bottom:40px;*/
+	margin: 0 auto;
+	border-radius: 5px;
+	background-color: #d2e1ef;
+}
+.catalog-input{
+	width: 80% !important;
+	margin: 0 auto;
+}
+.folderinner1{
+	text-align:center;
+	padding: 5px 15px;
+	border-radius: 5px;
+	/*background: linear-gradient(to bottom, #bce283, #c8e59e, #bce283);
+	border-bottom: 1px solid #b5d18e;*/
+	background: linear-gradient(to bottom, #b5cce0, #cbdded, #b5cce0);
+	border-bottom: 1px solid #c1cfdd;
+}
+.folderinner2{
+	padding: 5px 30px;
+	text-align:center;
+	/*background-color: #cfe5b0;*/
+	background-color: #d2e1ef;
+}
+.folderinner2 span{
+	font-family: Helvetica;
+	font-size: 15px;
+}
+.folderinner2 button{
+	margin-left:10px;
+	margin-top:5px;
+}
+.footer{
+	width: 100%;
+	height: 155px;
+	background-color: #002029 ;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	color: white;
+	text-align: center;
+}
+.footeropen{
+	transition: All 1s ease;
+	transform: translate(0px);
+}
+.footerclose{
+	transition: All 1s ease;
+	transform: translate(0px,105px);
+}
+.white{
+	color:white;
+	text-decoration: none;
+}
+.footer a:hover{
+	text-decoration: none;
+	color: #549D27;
+}
+
+@media (min-width: 992px){
+	/* wieksze -   md-lg*/
+.path{
+	margin-left: 100px;
+}
+.fileemanager{
+	width: 65%;
+	height: auto;
+	padding-bottom: 15px;
+}
+.folderman{
+	width: 40%;
+	height: auto;
+	padding-bottom: 15px;
+	margin-left:230px;
+}
+}
+@media (max-width: 991px) and (min-width: 769px){
+	
+.path{
+	margin-left: 50px;
+}
+.line-dir{
+		width:740px;
+}
+.file-dir{
+	width: 316px;
+}
+.ext-dir{
+	width: 72px;
+}
+.delete-dir{
+	width: 100px;
+}
+.line-file{
+	width:740px;
+}
+.file-file{
+	width: 316px;
+}
+.ext-file{
+	width: 72px;
+}
+.delete-dir-file{
+	width: 50px;
+}
+.download-file{
+	width:50px;
+}
+.download-file button{
+	display: block;
+	margin: 0 auto;
+}
+.delete-dir-file button{
+	display: block ;
+	margin: 0 auto;
+}
+.fileemanager{
+	width: 100%;
+	height: auto;
+	padding-bottom: 15px;
+}
+.folderman{
+	width: 70%;
+	height: auto;
+	padding-bottom: 15px;
+	margin-left: 125px;
+}
+}
+@media (max-width: 768px ) and (min-width: 577px){
+	/* sm */
+.path{
+	margin-left: 50px;
+}
+.line-dir{
+	width:560px;
+	height:34px;
+	border:1px solid #d2d6e0; 
+	background-color: #e5e6e8
+}
+.line-file{
+	width:560px;
+	height:35px;
+	border:1px solid #dcdee2; 
+	background-color: #eff0f2
+}
+.file-dir{
+	width: 330px;
+}
+.file-file{
+	width: 330px;
+}
+.download-file button{
+	display: block;
+	margin: 0 auto;
+}
+.delete-dir-file button{
+	display: block ;
+	margin: 0 auto;
+}
+.delete-dir-file{
+	width: 74px;
+}
+.download-file{
+	width: 74px;
+}
+.fileemanager{
+	width: 100%;
+	height: auto;
+	padding-bottom: 15px;
+}
+.folderman{
+	width: 75%;
+	height: auto;
+	padding-bottom: 15px;
+	margin: 0 auto;
+}
+}
+
+@media (max-width: 576px){
+	/* xs */
+.path{
+	margin-left: 15px;
+}
+.line-dir{
+	width:520px;
+	height:34px;
+	border:1px solid #d2d6e0; 
+	background-color: #e5e6e8
+}
+.file-dir{
+	width:335px;
+}
+.delete-dir{
+	width: 100px;
+}
+.file-file{
+	width: 335px;
+}
+.line-file{
+	width:520px;
+	height:35px;
+	border:1px solid #dcdee2; 
+	background-color: #eff0f2
+}
+.delete-dir-file{
+	width: 50px;
+}
+.download-file{
+	width: 50px;
+}
+.download-file button{
+	display: block;
+	margin: 0 auto;
+}
+.delete-dir-file button{
+	display: block ;
+	margin: 0 auto;
+}
+.fileemanager{
+	width: 100%;
+	height: auto;
+	padding-bottom: 15px;
+}
+.folderman{
+	width: 100%;
+	height: auto;
+	padding-bottom: 15px;
+}
+}
