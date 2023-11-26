@@ -7,18 +7,27 @@ $login=$_POST["login"];
 $login = secure_string($connect, $login);
 $password=$_POST["password"];
 $password = secure_string($connect, $password);
-$password=sha1(sha1($password));
 if(mysqli_connect_errno()==0)
 {
-  $result=$connect->query("SELECT * From users$dbprefix WHERE login='$login' AND password='$password'");
+  $result=$connect->query("SELECT * From users$dbprefix WHERE login='$login'");
+  
   if(mysqli_num_rows($result) > 0){
     $row=$result->fetch_assoc();
-    $_SESSION['login']=$login;
-    $_SESSION['permissions']=$row['permissions'];
-    $_SESSION['storage']=$row['storage'];
-    $_SESSION['usedspace']=$row['usedspace'];
-    header("Location: filemanager.php");
-		die();
+    if (password_verify($password, $row['password'])) {
+      $_SESSION['login']=$login;
+      $_SESSION['permissions']=$row['permissions'];
+      $_SESSION['storage']=$row['storage'];
+      $_SESSION['usedspace']=$row['usedspace'];
+      $_SESSION['key'] = $row['password'];
+      header("Location: filemanager.php");
+      die();
+    }
+    else{
+      session_unset();
+      session_destroy();
+      header("Location: loginform.php?err=1");
+      die();
+    }
   }
   else{
     session_unset();

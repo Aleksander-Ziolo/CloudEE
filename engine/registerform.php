@@ -15,7 +15,7 @@ include('config.php');
   //////////////////////////////
   -->
 
-	   <title>Zarejestruj się - <?php echo $project_title; ?></title>
+	   <title>Sign on - <?php echo $project_title; ?></title>
 	   <meta charset="utf-8">
 	   <meta name="viewport" content="width=device-width, initial-scale=1">
 	   <link rel="stylesheet" href="..\css\register_form.css">
@@ -33,20 +33,20 @@ include('config.php');
 	<div class="register-content col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<form action="register.php" method="post" class="register-form">
 			  <img src="..\img\clouds_logo2.png" alt="CloudS" class="img-logo">
-			  <h1 id="reg_h1">Formularz rejestracyjny</h1>
+			  <h1 id="reg_h1">Sign On</h1>
 
 
-			  Podaj login: <br><input type="text" name="login" class="form-control col-lg-6 col-md-6 col-sm-12 col-xs-12"><br><br>
-			  <h4>Hasło musi mieć conajmniej 8 znaków!</h4>
-			  Podaj hasło: <br><input type="password" name="password" class=" form-control col-lg-6 col-md-6 col-sm-12 col-xs-12"><br><br>
-			  Powtórz hasło: <br><input type="password" name="password2" class="form-control col-lg-6 col-md-6 col-sm-12 col-xs-12"><br><br>
-			  Zabezpieczenie antyspamowe: Dwa + 2 * cztery to...<br> <input type="text" name="spambot" class="form-control col-lg-6 col-md-6 col-sm-12 col-xs-12"><br><br>
+			  Login: <br><input type="text" name="login" class="form-control col-lg-6 col-md-6 col-sm-12 col-xs-12"><br><br>
+			  <h6>Password must contain at least 8 characters!</h6>
+			  Password: <br><input type="password" name="password" class=" form-control col-lg-6 col-md-6 col-sm-12 col-xs-12"><br><br>
+			  Retype password: <br><input type="password" name="password2" class="form-control col-lg-6 col-md-6 col-sm-12 col-xs-12"><br><br>
+			  Anti-spam: Two + 2 * four is...<br> <input type="text" name="spambot" class="form-control col-lg-6 col-md-6 col-sm-12 col-xs-12"><br><br>
 			  <br>
-			  <div style="text-align: center;"><button type='sumbit' class="btn btn-success">Zarejestruj się</button></div>
+			  <div style="text-align: center;"><button type='sumbit' class="btn btn-success">Register</button></div>
 
 		</form>
 		<br>
-		<div style="text-align: center;"><a href="../index.php"><button type='button' class="btn btn-danger">Wróć do strony głównej</button></a></div>
+		<div style="text-align: center;"><a href="../index.php"><button type='button' class="btn btn-danger">Return to Sign In</button></a></div>
 		<br>
 
 	</div>

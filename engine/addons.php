@@ -98,5 +98,47 @@ function responsive_filesize($size){ //automatyczna zmiana jednostek -> KB, MB, 
   }
 }
 
+function encrypt($source, $destination, $key){
+  $encryption_cipher = 'aes-256-cbc';
+  $ivLength = openssl_cipher_iv_length($encryption_cipher);
+  $iv = openssl_random_pseudo_bytes($ivLength);
+  $blocks = 10000;
+
+  $fpSource = fopen($source, 'rb');
+  $fpDest = fopen($destination, 'w');
+  fwrite($fpDest, $iv);
+  
+  while (! feof($fpSource)) {
+      $plaintext = fread($fpSource, $ivLength * $blocks);
+      $ciphertext = openssl_encrypt($plaintext, $encryption_cipher, $key, OPENSSL_RAW_DATA, $iv);
+      $iv = substr($ciphertext, 0, $ivLength);
+      fwrite($fpDest, $ciphertext);
+  }
+  fclose($fpSource);
+  fclose($fpDest);
+  return;
+}
+
+function decrypt($source, $destination, $key){
+  $encryption_cipher = 'aes-256-cbc';
+  $ivLength = openssl_cipher_iv_length($encryption_cipher);
+  $blocks = 10000;
+
+  $fpSource = fopen($source, 'rb');
+  $fpDest = fopen($destination, 'w');
+  $iv = fread($fpSource, $ivLength);
+  
+  while (! feof($fpSource)) {
+      $ciphertext = fread($fpSource, $ivLength * ($blocks+1));
+      $plaintext = openssl_decrypt($ciphertext, $encryption_cipher, $key, OPENSSL_RAW_DATA, $iv);
+      $iv = substr($plaintext, 0, $ivLength);
+      fwrite($fpDest, $plaintext);
+  }
+  fclose($fpSource);
+  fclose($fpDest);
+
+  return;
+}
+
 
 ?>

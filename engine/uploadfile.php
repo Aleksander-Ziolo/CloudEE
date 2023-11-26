@@ -1,4 +1,8 @@
 <?php
+require_once("config.php");
+require_once("addons.php");
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 function cleanArrayFiles(&$file_input) { //lepiej uklada tablice plikow
     $file_ary = array();
@@ -13,32 +17,13 @@ function cleanArrayFiles(&$file_input) { //lepiej uklada tablice plikow
     return $file_ary;
 }
 
-function pretty_dump($arr, $d=1){
-  if ($d==1) echo "<pre>";    // HTML Only
-  if (is_array($arr)){
-      foreach($arr as $k=>$v){
-          for ($i=0;$i<$d;$i++){
-              echo "\t";
-          }
-          if (is_array($v)){
-              echo $k.PHP_EOL;
-              Pretty_Dump($v, $d+1);
-          } else {
-              echo $k."\t".$v.PHP_EOL;
-          }
-      }
-  }
-  if ($d==1) echo "</pre>";   // HTML Only
-}
+//source: https://medium.com/@antoine.lame/how-to-encrypt-files-with-php-f4adead297de
 
-error_reporting(E_ALL);
-require_once("config.php");
-require_once("addons.php");
 session_start();
 $connect = new mysqli($dbhost, $dbusername, $dbpassword, $dbname);
 if(mysqli_connect_errno()==0)
 {
-  if(isset($_POST['sendfile']) && isset($_SESSION['login'])) //sprawdza czy plik zostal zamieszczony przez formularz
+  if(isset($_POST['sendfile']) && isset($_SESSION['login']) && isset($_SESSION['key']))//sprawdza czy plik zostal zamieszczony przez formularz
   {
     $file_arr = cleanArrayFiles($_FILES['file']);
     if(isset($_POST['pid'])) $pid = secure_string($connect, $_POST['pid']);
@@ -62,7 +47,9 @@ if(mysqli_connect_errno()==0)
       $used_space = $row['usedspace']; //sprawdzanie dostepnej przestrzeni dyskowej dla uzytkownika
       $file_loc = $file['tmp_name']; //tymczasowa lokalizacja pliku
       if($used_space + $file_size <= $total_space && $file_size <= $max_file_size){
-        if(move_uploaded_file($file_loc, $target_file)){ //wysylanie pliku
+        if(move_uploaded_file($file_loc, $target_file.".tmp")){ //wysylanie pliku
+          encrypt($target_file.".tmp", $target_file, $_SESSION['key']); //szyfrowanie AES-256
+          unlink($target_file.".tmp");
           $result = $connect->query("INSERT INTO files$dbprefix VALUES (NULL, '$pid', '$source_filename', '$source_file_ext', '$owner', 'FILE', '$date', '$file_size', '$target_file')");
           $postspace = $used_space + $file_size;
           $result = $connect->query("UPDATE users$dbprefix SET usedspace = '$postspace' WHERE login = '$owner'");
