@@ -15,12 +15,12 @@ CloudEE is an updated, new fork of CloudS with enhnaced security and management 
 Important:
 * English translation (done)
 * Add admin configuration panel (list/delete users, edit user disk quotas, edit default limits)
-* Add file encryption support (selectable on registration, up to 3 modes: no encryption, encryption with password being the same as account password - autodecrypt, encryption with separate password provided after login - intermediate step between login.php and filemanager.php - key stored in session)
-* Secure and sanitize all input fields, links, etc. (refer to PHP8 docs and remove whatever I tried to write myself ages ago)
-* Review register and login process (potential rewrite)
+* Add file encryption support (selectable on registration, up to 3 modes: no encryption, encryption with password being the same as account password - autodecrypt, encryption with separate password provided after login - intermediate step between login.php and filemanager.php - key stored in session) (done autodecrypt mode)
+* Secure and sanitize all input fields, links, etc. (review needed)
+* Review register and login process (review done)
   
 Nice to have:
-* Add file hash computation (provide integrity verification)
+* Add file hash computation (done)
 * UI refresh to look at least decent (bootstrap rewrite needed)
 
   
