@@ -272,3 +272,9 @@ echo "<br><a name='newfolder'></a>";
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<?php
+if(isset($_GET['error'])){ //kontrola bledow
+  if($_GET['error'] == 1) echo "<script> alert('File integrity check failed! File is corrupted or decryption key is invalid.'); </script>";
+}
+?>

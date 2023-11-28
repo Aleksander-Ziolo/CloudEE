@@ -63,37 +63,37 @@ include('config.php');
 if(isset($_GET['err'])){
   if($_GET["err"]==1){
     echo "<script>
-      alert('Błąd: Hasła nie są zgodne.');
+      alert('Error: Password mismatch.');
     </script>
     ";
   }
   else if($_GET["err"]==2){
     echo "<script>
-      alert('Błąd: Długość hasła nie spełnia wymagań.');
+      alert('Error: Password length doesn't meet requirements.');
     </script>
     ";
   }
   else if($_GET["err"]==3){
     echo "<script>
-      alert('Błąd: Odpowiedź na pytanie antyspamowe jest nieprawidłowa.');
+      alert('Error:Failed captcha challenge.');
     </script>
     ";
   }
   else if($_GET["err"]==4){
     echo "<script>
-      alert('Błąd: Ta nazwa użytkownika jest już zajęta.');
+      alert('Error: This username is unavailable.');
     </script>
     ";
   }
   else if($_GET["err"]==5){
     echo "<script>
-      alert('Błąd: Długość nazwy użytkownika jest nieprawidłowa.');
+      alert('Error: Username length is invalid');
     </script>
     ";
   }
   else{
     echo "<script>
-      alert('Wystąpił nieoczekiwany błąd.');
+      alert('Error: Unknown issue. Please try again later.');
     </script>
     ";
   }

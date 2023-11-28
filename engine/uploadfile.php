@@ -48,9 +48,10 @@ if(mysqli_connect_errno()==0)
       $file_loc = $file['tmp_name']; //tymczasowa lokalizacja pliku
       if($used_space + $file_size <= $total_space && $file_size <= $max_file_size){
         if(move_uploaded_file($file_loc, $target_file.".tmp")){ //wysylanie pliku
+          $checksum = hash_file('sha256', $target_file.".tmp"); //wyznaczanie sumy kontrolnej 
           encrypt($target_file.".tmp", $target_file, $_SESSION['key']); //szyfrowanie AES-256
           unlink($target_file.".tmp");
-          $result = $connect->query("INSERT INTO files$dbprefix VALUES (NULL, '$pid', '$source_filename', '$source_file_ext', '$owner', 'FILE', '$date', '$file_size', '$target_file')");
+          $result = $connect->query("INSERT INTO files$dbprefix VALUES (NULL, '$pid', '$source_filename', '$source_file_ext', '$owner', 'FILE', '$date', '$file_size', '$target_file', '$checksum')");
           $postspace = $used_space + $file_size;
           $result = $connect->query("UPDATE users$dbprefix SET usedspace = '$postspace' WHERE login = '$owner'");
         }

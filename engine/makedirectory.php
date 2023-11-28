@@ -25,7 +25,7 @@ $owner=$_SESSION['login'];
 $date = date('Y-m-d H:i:s', time()); //aktualna data
 if(mysqli_connect_errno()==0)
 {
-  $result = $connect->query("INSERT INTO files$dbprefix VALUES (NULL, '$pid', '$dir_name', '', '$owner', 'DIR', '$date', 0, '')");
+  $result = $connect->query("INSERT INTO files$dbprefix VALUES (NULL, '$pid', '$dir_name', '', '$owner', 'DIR', '$date', 0, '', NULL)");
   $result = $connect->query("SELECT id FROM files$dbprefix WHERE pid='$pid' AND owner='$owner' AND name='$dir_name'");
   $row = $result->fetch_assoc();
   $id = $row['id'];
