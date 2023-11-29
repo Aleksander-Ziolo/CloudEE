@@ -276,5 +276,6 @@ echo "<br><a name='newfolder'></a>";
 <?php
 if(isset($_GET['error'])){ //kontrola bledow
   if($_GET['error'] == 1) echo "<script> alert('File integrity check failed! File is corrupted or decryption key is invalid.'); </script>";
+  else if($_GET['error'] == 2) echo "<script> alert('This feature is currently disabled.'); </script>";
 }
 ?>

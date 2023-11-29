@@ -38,7 +38,7 @@ else{
 		}
 		else{
 			$passwd=password_hash($password, PASSWORD_DEFAULT);
-			$connect->query("INSERT INTO users$dbprefix VALUES (NULL, '$login', '$passwd', '1', '$date', '$default_storage', '0')");
+			$connect->query("INSERT INTO users$dbprefix VALUES (NULL, '$login', '$passwd', '1', '$date', '$default_storage', '0', '1')");
 			//przekierowanie do: dziekujemy za rejestracje a potem index.php
 					header("Location: ../index.php"); //tymczasowo
 			die();

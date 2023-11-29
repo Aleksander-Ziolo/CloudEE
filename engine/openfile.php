@@ -1,6 +1,10 @@
 <?php
 require_once("config.php");
 require_once("addons.php");
+
+header("Location: filemanager.php?error=2"); //function disabled - encryption not supported
+die();
+
 session_start();
 $connect = new mysqli($dbhost, $dbusername, $dbpassword, $dbname);
 if(mysqli_connect_errno()==0)
