@@ -18,7 +18,7 @@ if(mysqli_connect_errno()==0)
       $_SESSION['permissions']=$row['permissions'];
       $_SESSION['storage']=$row['storage'];
       $_SESSION['usedspace']=$row['usedspace'];
-      $_SESSION['key'] = hash('sha256', $row['password']);
+      $_SESSION['key'] = hash('sha256', $password);
       header("Location: filemanager.php");
       die();
     }

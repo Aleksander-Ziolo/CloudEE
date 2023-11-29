@@ -11,7 +11,7 @@ $spambot = secure_string($connect, $spambot);
 $login=$_POST["login"];
 $login = secure_string($connect, $login);
 $date=date('Y-m-d H:i:s', time());
-if($password!=$ver){
+if(strcmp($password, $ver) != 0){
 	header("Location: registerform.php?err=1"); //blad: hasla nie zgadzaja sie
 	die();
 }
