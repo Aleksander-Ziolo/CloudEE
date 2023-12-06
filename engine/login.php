@@ -15,6 +15,7 @@ if(mysqli_connect_errno()==0)
     $row=$result->fetch_assoc();
     if (password_verify($password, $row['password'])) {
       $_SESSION['login']=$login;
+      $_SESSION['userId']=$row['id'];
       $_SESSION['permissions']=$row['permissions'];
       $_SESSION['storage']=$row['storage'];
       $_SESSION['usedspace']=$row['usedspace'];

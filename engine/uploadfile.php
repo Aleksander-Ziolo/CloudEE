@@ -38,6 +38,7 @@ if(mysqli_connect_errno()==0)
       $source_file_ext = pathinfo($file['name'], PATHINFO_EXTENSION); //ustalanie rozszerzenia pliku
       $source_filename = secure_string($connect, $file['name']); //nazwa wysylanego pliku
       $owner = $_SESSION['login'];
+      $userId=$_SESSION['userId'];
       $date = date('Y-m-d H:i:s', time()); //aktualna data
       $file_size = intval($file['size']/1024); //rozmiar pliku (w KB)
       $file_size++; //zaokrąglanie rozmiaru w gore
@@ -51,9 +52,9 @@ if(mysqli_connect_errno()==0)
           $checksum = hash_file('sha256', $target_file.".tmp"); //wyznaczanie sumy kontrolnej 
           encrypt($target_file.".tmp", $target_file, $_SESSION['key']); //szyfrowanie AES-256
           unlink($target_file.".tmp");
-          $result = $connect->query("INSERT INTO files$dbprefix VALUES (NULL, '$pid', '$source_filename', '$source_file_ext', '$owner', 'FILE', '$date', '$file_size', '$target_file', '$checksum')");
+          $result = $connect->query("INSERT INTO files$dbprefix VALUES (NULL, '$pid', '$source_filename', '$source_file_ext', '$userId', 'FILE', '$date', '$file_size', '$target_file', '$checksum')");
           $postspace = $used_space + $file_size;
-          $result = $connect->query("UPDATE users$dbprefix SET usedspace = '$postspace' WHERE login = '$owner'");
+          $result = $connect->query("UPDATE users$dbprefix SET usedspace = '$postspace' WHERE id = '$userId'");
         }
         else{
           header("Location: uploadfileform.php?err=3"); //blad: wysylanie pliku nie powiodlo sie

@@ -8,8 +8,9 @@ if(mysqli_connect_errno()==0)
 {
   if(isset($_POST['id']) && isset($_SESSION['login']) && isset($_SESSION['key'])){
     $login = $_SESSION['login'];
+    $userId = $_SESSION['userId'];
     $id = secure_string($connect, $_POST['id']);
-    $result = $connect->query("SELECT name,path,checksum FROM files$dbprefix WHERE id='$id' AND owner='$login'");
+    $result = $connect->query("SELECT name,path,checksum FROM files$dbprefix WHERE id='$id' AND owner='$userId'");
     $row = $result->fetch_assoc();
     $path = $row['path'];
     $name = $row['name'];

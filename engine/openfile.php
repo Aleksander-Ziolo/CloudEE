@@ -15,7 +15,8 @@ if(mysqli_connect_errno()==0)
     $current_dir = $_POST['pid'];
     $current_dir = htmlspecialchars($current_dir);
     $login = $_SESSION['login'];
-    $result = $connect->query("SELECT name,ext,path FROM files$dbprefix WHERE id='$id' AND owner='$login' AND type='FILE'");
+    $userId=$_SESSION['userId'];
+    $result = $connect->query("SELECT name,ext,path FROM files$dbprefix WHERE id='$id' AND owner='$userId' AND type='FILE'");
     $row = $result->fetch_assoc();
     $filename = $row['name'];
     $ext = $row['ext'];

@@ -8,7 +8,8 @@ if(!isset($_SESSION['login'])){ //sprawdzanie czy zalogowany
   die();
 }
 $login = $_SESSION['login'];
-$stat = new Statistics($connect, $login, $dbprefix); //dostep do statystyk
+$userId = $_SESSION['userId'];
+$stat = new Statistics($connect, $userId, $dbprefix); //dostep do statystyk
 if(!isset($_GET['pid'])) $current_dir=0; //sprawdzanie, w jakim katalogu sie znajdujemy
 else{
   $current_dir=secure_string($connect, $_GET['pid']);
@@ -16,7 +17,7 @@ else{
 if(mysqli_connect_errno()==0) //pobieranie danych z bazy
 {
   if($current_dir!=0){ //ustalanie nazwy katalogu, w ktorym jestesmy
-    $result = $connect->query("SELECT name,pid,type FROM files$dbprefix WHERE id='$current_dir' AND owner='$login'");
+    $result = $connect->query("SELECT name,pid,type FROM files$dbprefix WHERE id='$current_dir' AND owner='$userId'");
     $row = $result->fetch_assoc();
     $dir_name = $row['name'];
     $dir_parent = $row['pid'];
@@ -32,7 +33,7 @@ if(mysqli_connect_errno()==0) //pobieranie danych z bazy
   }
   //pobieranie listy plikow
  $files = array();
- $result = $connect->query("SELECT id,name,ext,type,updated,size FROM files$dbprefix WHERE pid='$current_dir' AND owner='$login'");
+ $result = $connect->query("SELECT id,name,ext,type,updated,size FROM files$dbprefix WHERE pid='$current_dir' AND owner='$userId'");
  while($row = $result->fetch_assoc()){
  $files[] = $row;
  }
@@ -161,7 +162,7 @@ echo "<br>";
 	  <?php
  if(isset($_SESSION['move'])){
    $move_id=intval($_SESSION['move']);
-   $result = $connect->query("SELECT name,size FROM files$dbprefix WHERE id=$move_id AND owner='$login'");
+   $result = $connect->query("SELECT name,size FROM files$dbprefix WHERE id=$move_id AND owner='$userId'");
    $move_item = $result->fetch_assoc();
    echo "<div class='fileemanager'><div class='inner1'>";
    echo "<h4><i class='fa fa-compass fa-2x'></i> Clipboard</h4></div><div class='inner2'>Wybrany plik: ".$move_item['name']."<br>";

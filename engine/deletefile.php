@@ -26,8 +26,8 @@ function remdir($id,$connect,$dbprefix) { //przyjmuje id oraz dane polaczenia do
   }
 }
 
-function refresh_usedspace($connect, $username, $dbprefix){
-  $result = $connect->query("SELECT sum(size) AS size FROM files$dbprefix WHERE owner='$username';");
+function refresh_usedspace($connect, $username, $userId, $dbprefix){
+  $result = $connect->query("SELECT sum(size) AS size FROM files$dbprefix WHERE owner='$userId';");
   $row = $result->fetch_assoc();
   $size = intval($row['size']);
   $result = $connect->query("UPDATE users$dbprefix SET usedspace=$size WHERE login='$username';");
@@ -45,26 +45,27 @@ if(mysqli_connect_errno()==0)
       settype($pid, "integer");
     }
     $owner = $_SESSION['login'];
+    $userId = $_SESSION['userId'];
     $id=$_POST['id'];
     settype($id, "integer");
-    $result = $connect->query("SELECT path,type FROM files$dbprefix WHERE id='$id' AND owner='$owner'"); //pobieranie metadanych obiketu
+    $result = $connect->query("SELECT path,type FROM files$dbprefix WHERE id='$id' AND owner='$userId'"); //pobieranie metadanych obiketu
     $row = $result->fetch_assoc();
     $path = $row['path']; //sciezka do usuwanego pliku
     $type = $row['type']; //plik czy katalog
     if($type === "DIR"){
       remdir($id,$connect,$dbprefix);
-      refresh_usedspace($connect, $owner, $dbprefix);
+      refresh_usedspace($connect, $owner, $userId, $dbprefix);
       header("Location: filemanager.php");
       die();
     }
     else if($type === "FILE"){
-      $result = $connect->query("DELETE FROM files$dbprefix WHERE id='$id' AND owner='$owner'"); //usuwanie wpisu pliku
-      $result = $connect->query("SELECT count(id) AS ids FROM files$dbprefix WHERE path='$path' AND owner='$owner'");
+      $result = $connect->query("DELETE FROM files$dbprefix WHERE id='$id' AND owner='$userId'"); //usuwanie wpisu pliku
+      $result = $connect->query("SELECT count(id) AS ids FROM files$dbprefix WHERE path='$path' AND owner='$userId'");
       $row = $result->fetch_assoc();
       if($row['ids']<1){
         unlink($path);
       }
-      refresh_usedspace($connect, $owner, $dbprefix);
+      refresh_usedspace($connect, $owner, $userId, $dbprefix);
       header("Location: filemanager.php?pid=$pid");
       die();
     }

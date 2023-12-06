@@ -8,6 +8,7 @@ if(!isset($_SESSION['login']) || !isset($_SESSION['key'])){
 }
 $connect = new mysqli($dbhost, $dbusername, $dbpassword, $dbname);
 $login = $_SESSION['login'];
+$userId = $_SESSION['userId'];
 $old_password=secure_string($connect, $_POST['old']);
 $new_password=secure_string($connect, $_POST['new']);
 $verify_password=secure_string($connect, $_POST['new2']);
@@ -38,7 +39,7 @@ if(!$connect->connect_error){
         die();
     }
     $new_key = hash('sha256', $new_password);
-    $result=$connect->query("SELECT * From files$dbprefix WHERE owner='$login'");
+    $result=$connect->query("SELECT * From files$dbprefix WHERE owner='$userId'");
     while($row = $result->fetch_assoc()){
         $path = $row['path'];
         if(!empty($path) && file_exists($path)){ 

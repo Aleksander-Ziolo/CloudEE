@@ -12,35 +12,35 @@ function secure_string($connect, $string){ //zabezpieczenie stringow do bazy dan
 
 class Statistics{    //klasa dostawcy statystyk profilowych
   private $connect;
-  private $username;
+  private $userId;
   private $dbprefix;
 
-  function __construct($connect, $username, $dbprefix) {
+  function __construct($connect, $userId, $dbprefix) {
     $this->connect = $connect;
-    $this->username = $username;
+    $this->userId = $userId;
     $this->dbprefix = $dbprefix;
   }
 
   function num_of_files(){ //ilosc plikow
-    $result = $this->connect->query("SELECT count(id) AS num FROM files$this->dbprefix WHERE owner='$this->username' AND type='FILE';");
+    $result = $this->connect->query("SELECT count(id) AS num FROM files$this->dbprefix WHERE owner='$this->userId' AND type='FILE';");
     $row = $result->fetch_assoc();
     return $row['num'];
   }
 
   function size_profile(){ //rozmiar profilu (w KB)
-    $result = $this->connect->query("SELECT usedspace FROM users$this->dbprefix WHERE login='$this->username'");
+    $result = $this->connect->query("SELECT usedspace FROM users$this->dbprefix WHERE id='$this->userId'");
     $row = $result->fetch_assoc();
     return $row['usedspace'];
   }
 
   function total_storage(){ //calkowita dostepna przestrzen (w KB)
-    $result = $this->connect->query("SELECT storage FROM users$this->dbprefix WHERE login='$this->username'");
+    $result = $this->connect->query("SELECT storage FROM users$this->dbprefix WHERE id='$this->userId'");
     $row = $result->fetch_assoc();
     return $row['storage'];
   }
 
   function filesize_comparison(){ //zliczanie zajetego miejsca przez okreslone rozszerzenia plikow - zwraca tablice 2d
-    $result = $this->connect->query("SELECT ext, SUM(size) AS size, COUNT(id) AS files FROM files$this->dbprefix WHERE owner='$this->username' GROUP BY ext ORDER BY size DESC");
+    $result = $this->connect->query("SELECT ext, SUM(size) AS size, COUNT(id) AS files FROM files$this->dbprefix WHERE owner='$this->userId' GROUP BY ext ORDER BY size DESC");
     while($row = $result->fetch_assoc()){
       if($row['size']!=0) $output[] = $row;
     }
@@ -53,13 +53,13 @@ class Statistics{    //klasa dostawcy statystyk profilowych
   }
 
   function local_filesInDir($id){ //liczba plikow w katalogu - przyjmuje id katalogu
-    $result = $this->connect->query("SELECT count(id) AS num FROM files$this->dbprefix WHERE owner='$this->username' AND type='FILE' AND pid='$id'");
+    $result = $this->connect->query("SELECT count(id) AS num FROM files$this->dbprefix WHERE owner='$this->userId' AND type='FILE' AND pid='$id'");
     $row = $result->fetch_assoc();
     return $row['num'];
   }
 
   function local_sizeOfDir($id){ //rozmiar katalogu - przyjmuje id katalogu
-    $result = $this->connect->query("SELECT id,type,size FROM files$this->dbprefix WHERE owner='$this->username' AND pid='$id'");
+    $result = $this->connect->query("SELECT id,type,size FROM files$this->dbprefix WHERE owner='$this->userId' AND pid='$id'");
     $count = 0; //w KB
     while($row = $result->fetch_assoc()){
       $data[] = $row;
