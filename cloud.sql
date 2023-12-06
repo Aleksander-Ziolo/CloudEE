@@ -27,16 +27,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `files` (
-  `id` int(11) NOT NULL,
-  `pid` int(11) NOT NULL,
-  `name` text COLLATE utf8_bin NOT NULL,
-  `ext` text COLLATE utf8_bin NOT NULL,
-  `owner` text COLLATE utf8_bin NOT NULL,
-  `type` text COLLATE utf8_bin NOT NULL,
-  `updated` text COLLATE utf8_bin NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `pid` bigint(20) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `ext` varchar(50) NOT NULL,
+  `owner` int(11) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `updated` varchar(100) NOT NULL,
   `size` bigint(20) NOT NULL,
-  `path` text COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `path` varchar(100) NOT NULL,
+  `checksum` varchar(512) NULL
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -45,12 +46,12 @@ CREATE TABLE `files` (
 --
 
 CREATE TABLE `log` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `type` int(11) NOT NULL,
-  `text` text COLLATE utf8_bin NOT NULL,
-  `date` text COLLATE utf8_bin NOT NULL,
-  `owner` text COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `text` text NOT NULL,
+  `date` text NOT NULL,
+  `owner` text NOT NULL
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -60,28 +61,15 @@ CREATE TABLE `log` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `login` text COLLATE utf8_bin NOT NULL,
-  `password` text COLLATE utf8_bin NOT NULL,
+  `login` varchar(100) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `permissions` int(11) NOT NULL,
-  `registerdate` text COLLATE utf8_bin NOT NULL,
+  `registerdate` varchar(100) NOT NULL,
   `storage` bigint(20) NOT NULL,
-  `usedspace` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `usedspace` bigint(20) NOT NULL,
+  `encryption_mode` INT NULL
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Zrzut danych tabeli `users`
---
-
-INSERT INTO `users` (`id`, `login`, `password`, `permissions`, `registerdate`, `storage`, `usedspace`) VALUES
-(6, 'aleksander002', '12345678', 1, 'data-data', 1024, 0);
-
---
--- Indeksy dla zrzutów tabel
---
-
---
--- Indexes for table `files`
---
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`);
 
@@ -97,13 +85,6 @@ ALTER TABLE `log`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT dla tabeli `files`
---
 ALTER TABLE `files`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
@@ -115,10 +96,5 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `files` ADD `checksum` VARCHAR(512) NULL AFTER `path`;
-ALTER TABLE `users` ADD `encryption_mode` INT NULL AFTER `usedspace`;
