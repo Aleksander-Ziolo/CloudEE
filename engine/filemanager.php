@@ -9,6 +9,7 @@ if(!isset($_SESSION['login'])){ //sprawdzanie czy zalogowany
 }
 $login = $_SESSION['login'];
 $userId = $_SESSION['userId'];
+$permissions = $_SESSION['permissions'];
 $stat = new Statistics($connect, $userId, $dbprefix); //dostep do statystyk
 if(!isset($_GET['pid'])) $current_dir=0; //sprawdzanie, w jakim katalogu sie znajdujemy
 else{
@@ -111,6 +112,9 @@ if(mysqli_connect_errno()==0) //pobieranie danych z bazy
 								<li><a href="uploadfileform.php"><i class="fa fa-file"></i> Upload file</a></li>
 								<li><a href="filemanager.php#newfolder"><i class="fa fa-folder-open"></i> Create new directory</a></li>
 								<li><a href="panelstat.php"><i class="fa fa-star"></i> Storage information</a></li>
+                <?php if($permissions == 2): ?>
+                <li><a href="accountmanager.php"><i class="fa fa-star"></i> Admin Panel</a></li>
+                <?php endif; ?>
 							</ul>
 					</li>
 					<li><a href="logout.php"><span class="fa fa-power-off" aria-hidden="true"></span><span class="hidden-lg hidden-md hidden-sm">    Sign </span></a></li>
@@ -260,7 +264,7 @@ echo "<br><a name='newfolder'></a>";
 	<div class="footer footerclose" id="myFooter">
 		<button id="buttonft" type="button" class="btn btn-link" onClick="footer()" ><i class="fa fa-angle-up fa-3x"></i></button>
 		<?php 
-			echo "<br>Number of files: ".$stat->local_filesInDir($current_dir)."<br>Directory size: ".responsive_filesize($stat->local_sizeOfDir($current_dir))."<br>";
+			echo "<br>Items: ".$stat->local_objectsInDir($current_dir)."<br>Directory size: ".responsive_filesize($stat->local_sizeOfDir($current_dir))."<br>";
 			/*echo "Total files: ".$stat->num_of_files()."<br>Disk space taken: ".$stat->size_profile()."<br>";
 			echo "Total available storage: ".$stat->total_storage()."<br>";*/
 		?>
@@ -269,7 +273,7 @@ echo "<br><a name='newfolder'></a>";
   
   
   <!-- include javascript, jQuery FIRST -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>

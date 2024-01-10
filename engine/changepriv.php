@@ -1,4 +1,6 @@
 <?php
+//$variable = $_GET['del']; 
+$pid= $_POST['pid']; 
 function remdir($id,$connect,$dbprefix) { //przyjmuje id oraz dane polaczenia do sql
   if(mysqli_connect_errno()==0 && $id>0)
   {
@@ -13,7 +15,7 @@ function remdir($id,$connect,$dbprefix) { //przyjmuje id oraz dane polaczenia do
         else if($type['type']==="FILE"){ //jezeli obiekt jest plikiem to go usuwa
           $tmp = $type['id'];
           $path = $type['path'];
-          $result = $connect->query("DELETE FROM files$dbprefix WHERE id='$tmp'");
+          $result = $connect->query("DELETE FROM users$dbprefix WHERE id='$variable'");
           $result = $connect->query("SELECT count(id) AS ids FROM files$dbprefix WHERE path='$path'");
           $row = $result->fetch_assoc();
           if($row['ids']<1){
@@ -21,13 +23,13 @@ function remdir($id,$connect,$dbprefix) { //przyjmuje id oraz dane polaczenia do
           }
         }
       }
-      $result = $connect->query("DELETE FROM files$dbprefix WHERE id='$id'"); //pusty katalog jest usuwany
+      $result = $connect->query("DELETE FROM users$dbprefix WHERE login='$variable'"); //pusty katalog jest usuwany
     unset($i);
   }
 }
 
-function refresh_usedspace($connect, $username, $userId, $dbprefix){
-  $result = $connect->query("SELECT sum(size) AS size FROM files$dbprefix WHERE owner='$userId';");
+function refresh_usedspace($connect, $username, $dbprefix){
+  $result = $connect->query("SELECT sum(size) AS size FROM files$dbprefix WHERE owner='$username';");
   $row = $result->fetch_assoc();
   $size = intval($row['size']);
   $result = $connect->query("UPDATE users$dbprefix SET usedspace=$size WHERE login='$username';");
@@ -45,34 +47,29 @@ if(mysqli_connect_errno()==0)
       settype($pid, "integer");
     }
     $owner = $_SESSION['login'];
-    $userId = $_SESSION['userId'];
     $id=$_POST['id'];
     settype($id, "integer");
-    $result = $connect->query("SELECT path,type FROM files$dbprefix WHERE id='$id' AND owner='$userId'"); //pobieranie metadanych obiketu
+    $priv=$_POST['permissions'];
+    settype($priv, "integer");
+    $result = $connect->query("SELECT path,type FROM files$dbprefix WHERE id='$id' AND owner='$owner'"); //pobieranie metadanych obiketu
     $row = $result->fetch_assoc();
     $path = $row['path']; //sciezka do usuwanego pliku
     $type = $row['type']; //plik czy katalog
-    if($type === "DIR"){
-      remdir($id,$connect,$dbprefix);
-      refresh_usedspace($connect, $owner, $userId, $dbprefix);
-      header("Location: filemanager.php");
+    if($priv == 1){
+        $priv = 2;
+        $result = $connect->query("UPDATE users$dbprefix SET permissions = $priv WHERE id=$id"); //usuwanie wpisu pliku
+      
+        header("Location: accountmanager.php");
+        die();
+    }
+    else{   
+        $priv = 1;
+      $result = $connect->query("UPDATE users$dbprefix SET permissions= $priv WHERE id=$id"); //usuwanie wpisu pliku
+      
+      header("Location: accountmanager.php");
       die();
     }
-    else if($type === "FILE"){
-      $result = $connect->query("DELETE FROM files$dbprefix WHERE id='$id' AND owner='$userId'"); //usuwanie wpisu pliku
-      $result = $connect->query("SELECT count(id) AS ids FROM files$dbprefix WHERE path='$path' AND owner='$userId'");
-      $row = $result->fetch_assoc();
-      if($row['ids']<1){
-        unlink($path);
-      }
-      refresh_usedspace($connect, $owner, $userId, $dbprefix);
-      header("Location: filemanager.php?pid=$pid");
-      die();
-    }
-    else{
-      header("Location: filemanager.php?pid=$pid");
-      die();
-    }
+    
   }
 }
 else{

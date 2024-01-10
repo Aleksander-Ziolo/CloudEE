@@ -117,9 +117,10 @@ if(mysqli_connect_errno()==0) //pobieranie danych z bazy
 		?>
 		</div>
 		</div>
+		<div style="text-align: center; margin-bottom: 20px;"><a href="changepasswordform.php"><button type='button' class="btn btn-danger">Change Password</button></a></div>
 </div>
 <br><br>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

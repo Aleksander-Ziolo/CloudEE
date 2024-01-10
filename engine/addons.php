@@ -58,6 +58,12 @@ class Statistics{    //klasa dostawcy statystyk profilowych
     return $row['num'];
   }
 
+  function local_objectsInDir($id){ //liczba obiektow w katalogu - przyjmuje id katalogu
+    $result = $this->connect->query("SELECT count(id) AS num FROM files$this->dbprefix WHERE owner='$this->userId' AND pid='$id'");
+    $row = $result->fetch_assoc();
+    return $row['num'];
+  }
+
   function local_sizeOfDir($id){ //rozmiar katalogu - przyjmuje id katalogu
     $result = $this->connect->query("SELECT id,type,size FROM files$this->dbprefix WHERE owner='$this->userId' AND pid='$id'");
     $count = 0; //w KB

@@ -3,7 +3,7 @@ $project_title = "CloudEE";
 
 $dbhost="localhost";
 $dbusername="root";
-$dbpassword="dev";
+$dbpassword="devOOBE";
 $dbname="cloud";
 $dbprefix=""; //wystepuje po nazwie tabeli (BEZ SPACJI)
 
