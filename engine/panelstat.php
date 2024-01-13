@@ -59,12 +59,12 @@ if(mysqli_connect_errno()==0) //pobieranie danych z bazy
 	   <link rel="stylesheet" href="..\css\panelstat.css">
 
 	<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../include/bootstrap.min.css" >
 
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
 	<!-- Font-Awesome -->
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../include/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -120,7 +120,7 @@ if(mysqli_connect_errno()==0) //pobieranie danych z bazy
 		<div style="text-align: center; margin-bottom: 20px;"><a href="changepasswordform.php"><button type='button' class="btn btn-danger">Change Password</button></a></div>
 </div>
 <br><br>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../include/jquery.min.js"></script>
+<script src="../include/bootstrap.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

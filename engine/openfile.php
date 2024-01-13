@@ -39,10 +39,10 @@ if(mysqli_connect_errno()==0)
 	   <link rel="stylesheet" href="..\css\openfile.css">
 	   
 	<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../include/bootstrap.min.css" >
 	
 	<!-- Font-Awesome -->
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../include/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
   <body>
 	<div class="container">
@@ -92,6 +92,6 @@ if(mysqli_connect_errno()==0)
 	  ?>
 	  <!-- include javascript, jQuery FIRST -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../include/bootstrap.min.js" crossorigin="anonymous"></script>
   </body>
 </html>
